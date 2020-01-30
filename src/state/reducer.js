@@ -9,10 +9,20 @@ import {
 } from "./actions";
 import levelOne from "../levels/one";
 import createState from "./createState";
+import Axios from "axios";
 
 export default function reducer(state, action) {
   switch (action.type) {
     case GAME_OVER:
+      const initials = prompt("YOUR SCORE WAS: " + state.score + "\nINITIALS FOR HIGH SCORE")
+      console.log("INITIALS", initials, "SCORE", state.score)
+      Axios.post("http://localhost:5000/api/v1/high-scores", {
+        initials,
+        score: state.score,
+      }).then(res =>{
+        console.log(res)
+      })
+
       return createState(levelOne);
     case DIE:
       return { ...state, lives: state.lives - 1 };
