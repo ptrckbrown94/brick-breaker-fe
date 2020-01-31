@@ -26,8 +26,8 @@ export default function GameContainer() {
 
   return (
     <>
-    <div
-      className="container"
+    {state.isPlaying && <div
+      className= "container"
       style={{
         width: DIMENSIONS.DEFAULT.WIDTH,
         height: DIMENSIONS.DEFAULT.HEIGHT
@@ -42,8 +42,8 @@ export default function GameContainer() {
       <Score />
       <Lives />
       <Score />
-    </div>
-    <HighScores />
+    </div>}
+    {!state.isPlaying && <HighScores /> }
     </>
   );
 }

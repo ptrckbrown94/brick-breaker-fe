@@ -5,7 +5,8 @@ import {
   PRESS_START,
   ADD_SCORE,
   DIE,
-  GAME_OVER
+  GAME_OVER,
+  START_GAME
 } from "./actions";
 import levelOne from "../levels/one";
 import createState from "./createState";
@@ -13,6 +14,10 @@ import Axios from "axios";
 
 export default function reducer(state, action) {
   switch (action.type) {
+   case START_GAME:
+     return createState(levelOne, {isPlaying: true});
+       
+     
     case GAME_OVER:
       const initials = prompt("YOUR SCORE WAS: " + state.score + "\nINITIALS FOR HIGH SCORE")
       console.log("INITIALS", initials, "SCORE", state.score)
