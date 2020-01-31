@@ -1,18 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Paddle from "../Paddle";
 import Ball from "../Ball";
 import Brick from "../Brick";
+import HighScores from "../HighScores";
 
 import { GameContext } from "../../state/context";
 import { DIMENSIONS } from "../../utils/constants";
 import Score from "../Score";
 import Lives from "../Lives";
+import Axios from "axios";
 
 export default function GameContainer() {
   const { state } = useContext(GameContext);
 
+
+  const [highScores, setHighScores] = useState([]);
+  useEffect(() => {
+    Axios.get("http://localhost:5000/api/v1/high-scores")
+      .then(res => {
+        console.log(res.data.HighScores)
+        setHighScores(res.data.HighScores)
+      })
+  }, [])
+
   return (
+    <>
     <div
       className="container"
       style={{
@@ -28,6 +41,9 @@ export default function GameContainer() {
       <Ball pos={state.ball} />
       <Score />
       <Lives />
+      <Score />
     </div>
+    <HighScores />
+    </>
   );
 }

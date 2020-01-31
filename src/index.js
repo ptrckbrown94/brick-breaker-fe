@@ -5,7 +5,7 @@ import App from "./App";
 import Axios from "axios";
 
 //Health Check
-Axios.get("localhost:5000/ping").then(() => {
+Axios.get("http://localhost:5000/ping").then(() => {
 console.log("should be working")
 }).catch(() => {
     console.log("not working")
